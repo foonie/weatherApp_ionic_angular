@@ -30,6 +30,20 @@ export class HomePage {
     });
   }
 
-  constructor() {}
+  addFavorite() {
+    if (this.city && !this.favorites.includes(this.city)) {
+      this.favorites.push(this.city);
+      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    }
+  }
 
+  loadFavorites() {
+    const saved = localStorage.getItem('favorites');
+    if (saved) this.favorites = JSON.parse(saved);
+  }
+
+  selectFavorite(city: string) {
+    this.city = city;
+    this.getWeather();
+  }
 }
